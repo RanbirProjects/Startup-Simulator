@@ -1,6 +1,6 @@
 [build]
   base = "client"
-  command = "CI=false npm install && npm run build"
+  command = "CI=false npm install --legacy-peer-deps && npm run build"
   publish = "build"
   functions = "netlify/functions"
   edge_functions = "netlify/edge-functions"
@@ -13,8 +13,9 @@
 
 [build.environment]
   NODE_VERSION = "18"
-  REACT_APP_API_URL = "https://your-backend-url.com"
   NPM_FLAGS = "--legacy-peer-deps"
+  CI = "false"
+  NODE_ENV = "production"
 
 [[headers]]
   for = "/*"
