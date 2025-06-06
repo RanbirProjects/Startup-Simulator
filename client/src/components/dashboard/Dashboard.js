@@ -111,9 +111,27 @@ const Dashboard = () => {
   ];
 
   const metrics = [
-    { title: 'Total Revenue', value: '$1.2M', change: '+15%', icon: <AttachMoney /> },
-    { title: 'Active Users', value: '12.5K', change: '+8%', icon: <PeopleIcon /> },
-    { title: 'Conversion Rate', value: '3.2%', change: '+2%', icon: <TrendingUpIcon /> }
+    { 
+      title: 'Total Revenue', 
+      value: '$1.2M', 
+      change: '+15%', 
+      icon: <AttachMoney />,
+      color: getColor('success')
+    },
+    { 
+      title: 'Active Users', 
+      value: '12.5K', 
+      change: '+8%', 
+      icon: <PeopleIcon />,
+      color: getColor('primary')
+    },
+    { 
+      title: 'Conversion Rate', 
+      value: '3.2%', 
+      change: '+2%', 
+      icon: <TrendingUpIcon />,
+      color: getColor('info')
+    }
   ];
 
   const containerVariants = {
