@@ -1,6 +1,6 @@
 [build]
   base = "client"
-  command = "CI=false npm run build"
+  command = "CI=false npm install && npm run build"
   publish = "build"
 
 [[redirects]]
@@ -12,6 +12,7 @@
 [build.environment]
   NODE_VERSION = "18"
   REACT_APP_API_URL = "https://your-backend-url.com"
+  NPM_FLAGS = "--legacy-peer-deps"
 
 [[headers]]
   for = "/*"
