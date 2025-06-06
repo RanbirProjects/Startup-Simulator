@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Typography,
@@ -13,41 +13,12 @@ import {
   Slider,
   Alert,
   Snackbar,
-  IconButton,
-  Tooltip,
-  Fade,
-  Zoom,
-  useTheme,
-  alpha,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Select,
-  MenuItem,
-  InputLabel,
-  Grid,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  Chip
+  useTheme
 } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
-import InfoIcon from '@mui/icons-material/Info';
+import { motion } from 'framer-motion';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SecurityIcon from '@mui/icons-material/Security';
-import PaletteIcon from '@mui/icons-material/Palette';
-import KeyboardIcon from '@mui/icons-material/Keyboard';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import ImportExportIcon from '@mui/icons-material/ImportExport';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
 
 const Settings = () => {
   const theme = useTheme();
@@ -55,41 +26,13 @@ const Settings = () => {
   // Theme and appearance settings
   const [themeMode, setThemeMode] = useState('light');
   const [fontSize, setFontSize] = useState(16);
-  const [accentColor, setAccentColor] = useState('#2196f3');
   const [profileVisibility, setProfileVisibility] = useState('public');
   const [twoFactorAuth, setTwoFactorAuth] = useState(false);
-  const [dataSharing, setDataSharing] = useState(false);
 
   // Notification settings
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [volume, setVolume] = useState(70);
-  const [customSound, setCustomSound] = useState(null);
-
-  // Keyboard shortcuts
-  const [keyboardShortcuts, setKeyboardShortcuts] = useState({
-    'Save': 'Ctrl + S',
-    'New Item': 'Ctrl + N',
-    'Search': 'Ctrl + F',
-    'Settings': 'Ctrl + ,',
-    'Help': 'Ctrl + ?'
-  });
-  const [editingShortcut, setEditingShortcut] = useState(null);
-
-  // Advanced privacy controls
-  const [privacySettings, setPrivacySettings] = useState({
-    dataRetention: '30days',
-    locationSharing: false,
-    activityTracking: true,
-    thirdPartyAccess: false,
-    dataEncryption: true
-  });
-
-  // Data management
-  const [exportDialog, setExportDialog] = useState(false);
-  const [importDialog, setImportDialog] = useState(false);
-  const [exportFormat, setExportFormat] = useState('json');
-  const [importFile, setImportFile] = useState(null);
 
   // Snackbar state
   const [snackbar, setSnackbar] = useState({
@@ -121,112 +64,6 @@ const Settings = () => {
     }
   };
 
-  // Theme change handler
-  const handleThemeChange = (newTheme) => {
-    setThemeMode(newTheme);
-    handleSave('themeMode', newTheme);
-  };
-
-  // Accent color change handler
-  const handleAccentColorChange = (event) => {
-    setAccentColor(event.target.value);
-    handleSave('accentColor', event.target.value);
-  };
-
-  // Handle notification sound change
-  const handleSoundChange = (event) => {
-    const sound = event.target.value;
-    setNotifications(sound === 'custom');
-    setSoundEnabled(sound === 'custom');
-    if (sound === 'custom' && customSound) {
-      const audio = new Audio(URL.createObjectURL(customSound));
-      audio.volume = volume / 100;
-      audio.play();
-    }
-    handleSave('notifications', sound === 'custom');
-    handleSave('soundEnabled', sound === 'custom');
-  };
-
-  // Handle custom sound upload
-  const handleCustomSoundUpload = (event) => {
-    const file = event.target.files[0];
-    if (file && file.type.startsWith('audio/')) {
-      setCustomSound(file);
-      handleSave('customSound', file);
-    }
-  };
-
-  // Handle keyboard shortcut edit
-  const handleShortcutEdit = (action) => {
-    setEditingShortcut(action);
-  };
-
-  const handleShortcutSave = useCallback(() => {
-    setSnackbar({
-      open: true,
-      message: 'Shortcuts saved successfully',
-      severity: 'success'
-    });
-  }, []);
-
-  // Handle data export
-  const handleExport = () => {
-    const data = {
-      settings: {
-        notifications: {
-          email: notifications,
-          push: notifications,
-          updates: notifications,
-          sound: notifications ? 'custom' : 'default',
-          volume: volume
-        },
-        privacy: privacySettings,
-        shortcuts: keyboardShortcuts
-      }
-    };
-
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `settings-export-${new Date().toISOString()}.${exportFormat}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    setExportDialog(false);
-  };
-
-  // Handle data import
-  const handleImport = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const data = JSON.parse(e.target.result);
-          // Apply imported settings
-          if (data.settings) {
-            setNotifications(data.settings.notifications.email);
-            setSoundEnabled(data.settings.notifications.sound === 'custom');
-            setVolume(data.settings.notifications.volume);
-            setPrivacySettings(data.settings.privacy);
-            setKeyboardShortcuts(data.settings.shortcuts);
-          }
-          handleSave('import', data);
-          setImportDialog(false);
-        } catch (error) {
-          setSnackbar({
-            open: true,
-            message: 'Invalid import file format',
-            severity: 'error'
-          });
-        }
-      };
-      reader.readAsText(file);
-    }
-  };
-
   const handleSave = (setting, value) => {
     console.log(`Saving ${setting}:`, value);
     setSnackbar({
@@ -239,17 +76,6 @@ const Settings = () => {
   const handleCloseSnackbar = () => {
     setSnackbar({ ...snackbar, open: false });
   };
-
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (editingShortcut) {
-        handleShortcutSave(event);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [editingShortcut, handleShortcutSave]);
 
   useEffect(() => {
     // Load saved settings
