@@ -28,9 +28,29 @@ import {
   School as SchoolIcon
 } from '@mui/icons-material';
 
+// Default theme colors in case useTheme fails
+const defaultColors = {
+  primary: '#1976d2',
+  secondary: '#dc004e',
+  success: '#4caf50',
+  info: '#2196f3',
+  warning: '#ff9800',
+  error: '#f44336'
+};
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const theme = useTheme();
+
+  // Fallback to default colors if theme is not available
+  const getColor = (colorKey) => {
+    try {
+      return theme?.palette?.[colorKey]?.main || defaultColors[colorKey];
+    } catch (error) {
+      console.warn('Theme error:', error);
+      return defaultColors[colorKey];
+    }
+  };
 
   const features = [
     {
@@ -39,7 +59,7 @@ const Dashboard = () => {
       action: () => navigate('/startups'),
       buttonText: 'View Startups',
       icon: <BusinessIcon sx={{ fontSize: 40 }} />,
-      color: theme.palette.primary.main
+      color: getColor('primary')
     },
     {
       title: 'Market Analysis',
@@ -47,7 +67,7 @@ const Dashboard = () => {
       action: () => navigate('/market-analysis'),
       buttonText: 'Analyze Market',
       icon: <AssessmentIcon sx={{ fontSize: 40 }} />,
-      color: theme.palette.secondary.main
+      color: getColor('secondary')
     },
     {
       title: 'Financial Projections',
@@ -55,7 +75,7 @@ const Dashboard = () => {
       action: () => navigate('/financial-projections'),
       buttonText: 'View Financials',
       icon: <AttachMoney sx={{ fontSize: 40 }} />,
-      color: theme.palette.success.main
+      color: getColor('success')
     },
     {
       title: 'Team Management',
@@ -63,7 +83,7 @@ const Dashboard = () => {
       action: () => navigate('/team-management'),
       buttonText: 'Manage Team',
       icon: <PeopleIcon sx={{ fontSize: 40 }} />,
-      color: theme.palette.info.main
+      color: getColor('info')
     },
     {
       title: 'Pitch Deck',
@@ -71,7 +91,7 @@ const Dashboard = () => {
       action: () => navigate('/pitch-deck'),
       buttonText: 'View Pitch Deck',
       icon: <DescriptionIcon sx={{ fontSize: 40 }} />,
-      color: theme.palette.warning.main
+      color: getColor('warning')
     },
     {
       title: 'Resources',
@@ -79,7 +99,7 @@ const Dashboard = () => {
       action: () => navigate('/resources'),
       buttonText: 'View Resources',
       icon: <SchoolIcon sx={{ fontSize: 40 }} />,
-      color: theme.palette.error.main
+      color: getColor('error')
     }
   ];
 
