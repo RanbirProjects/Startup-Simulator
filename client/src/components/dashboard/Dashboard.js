@@ -11,7 +11,8 @@ import {
   ListItemText,
   ListItemAvatar,
   Divider,
-  Paper
+  Paper,
+  useTheme
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -29,6 +30,7 @@ import {
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const features = [
     {
