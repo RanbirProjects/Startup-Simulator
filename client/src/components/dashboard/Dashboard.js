@@ -1,5 +1,19 @@
 import React from 'react';
-import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Box, Avatar, List, ListItem, ListItemText, ListItemAvatar, Divider, LinearProgress, useTheme, Paper } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Grid,
+  Button,
+  Box,
+  Avatar,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Divider,
+  useTheme,
+  Paper
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {

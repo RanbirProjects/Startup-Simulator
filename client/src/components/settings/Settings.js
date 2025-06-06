@@ -12,8 +12,7 @@ import {
   FormLabel,
   Slider,
   Alert,
-  Snackbar,
-  useTheme
+  Snackbar
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -21,8 +20,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SecurityIcon from '@mui/icons-material/Security';
 
 const Settings = () => {
-  const theme = useTheme();
-  
   // Theme and appearance settings
   const [themeMode, setThemeMode] = useState('light');
   const [fontSize, setFontSize] = useState(16);

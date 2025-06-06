@@ -5,13 +5,10 @@ import {
   Box,
   Tabs,
   Tab,
-  Paper,
   Grid,
   Card,
   CardContent,
   CardMedia,
-  CardActionArea,
-  useTheme,
   Tooltip,
   IconButton,
   Button,
@@ -19,9 +16,6 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import {
-  VideoLibrary as VideoLibraryIcon,
-  Article as ArticleIcon,
-  Build as BuildIcon,
   Bookmark as BookmarkIcon,
   BookmarkBorder as BookmarkBorderIcon,
   Share as ShareIcon,
@@ -210,7 +204,6 @@ const resources = {
 const Resources = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [savedItems, setSavedItems] = useState([]);
-  const theme = useTheme();
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
