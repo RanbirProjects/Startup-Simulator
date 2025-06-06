@@ -1,6 +1,6 @@
 [build]
   base = "client"
-  command = "npm run build"
+  command = "CI=false npm run build"
   publish = "build"
 
 [[redirects]]
@@ -10,7 +10,6 @@
   force = true
 
 [build.environment]
-  CI = "false"
   NODE_VERSION = "18"
   REACT_APP_API_URL = "https://your-backend-url.com"
 
@@ -21,3 +20,4 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=0, must-revalidate"
