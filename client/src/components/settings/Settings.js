@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Container,
   Typography,
@@ -61,12 +61,9 @@ const Settings = () => {
   const [dataSharing, setDataSharing] = useState(false);
 
   // Notification settings
-  const [emailNotifications, setEmailNotifications] = useState(true);
-  const [pushNotifications, setPushNotifications] = useState(true);
-  const [productUpdates, setProductUpdates] = useState(true);
-  const [notificationSound, setNotificationSound] = useState('default');
-  const [customSound, setCustomSound] = useState(null);
-  const [soundVolume, setSoundVolume] = useState(80);
+  const [notifications, setNotifications] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [volume, setVolume] = useState(70);
 
   // Keyboard shortcuts
   const [keyboardShortcuts, setKeyboardShortcuts] = useState({
@@ -138,13 +135,15 @@ const Settings = () => {
   // Handle notification sound change
   const handleSoundChange = (event) => {
     const sound = event.target.value;
-    setNotificationSound(sound);
-    if (sound === 'custom' && customSound) {
+    setNotifications(sound === 'custom');
+    setSoundEnabled(sound === 'custom');
+    if (sound === 'custom') {
       const audio = new Audio(URL.createObjectURL(customSound));
-      audio.volume = soundVolume / 100;
+      audio.volume = volume / 100;
       audio.play();
     }
-    handleSave('notificationSound', sound);
+    handleSave('notifications', sound === 'custom');
+    handleSave('soundEnabled', sound === 'custom');
   };
 
   // Handle custom sound upload
@@ -161,35 +160,24 @@ const Settings = () => {
     setEditingShortcut(action);
   };
 
-  const handleShortcutSave = (event) => {
-    if (event.key === 'Escape') {
-      setEditingShortcut(null);
-      return;
-    }
-    if (event.ctrlKey || event.metaKey) {
-      const newShortcut = `${event.ctrlKey ? 'Ctrl' : 'Cmd'} + ${event.key.toUpperCase()}`;
-      setKeyboardShortcuts(prev => ({
-        ...prev,
-        [editingShortcut]: newShortcut
-      }));
-      handleSave('keyboardShortcuts', {
-        ...keyboardShortcuts,
-        [editingShortcut]: newShortcut
-      });
-      setEditingShortcut(null);
-    }
-  };
+  const handleShortcutSave = useCallback(() => {
+    setSnackbar({
+      open: true,
+      message: 'Shortcuts saved successfully',
+      severity: 'success'
+    });
+  }, []);
 
   // Handle data export
   const handleExport = () => {
     const data = {
       settings: {
         notifications: {
-          email: emailNotifications,
-          push: pushNotifications,
-          updates: productUpdates,
-          sound: notificationSound,
-          volume: soundVolume
+          email: notifications,
+          push: notifications,
+          updates: notifications,
+          sound: notifications ? 'custom' : 'default',
+          volume: volume
         },
         privacy: privacySettings,
         shortcuts: keyboardShortcuts
@@ -218,11 +206,9 @@ const Settings = () => {
           const data = JSON.parse(e.target.result);
           // Apply imported settings
           if (data.settings) {
-            setEmailNotifications(data.settings.notifications.email);
-            setPushNotifications(data.settings.notifications.push);
-            setProductUpdates(data.settings.notifications.updates);
-            setNotificationSound(data.settings.notifications.sound);
-            setSoundVolume(data.settings.notifications.volume);
+            setNotifications(data.settings.notifications.email);
+            setSoundEnabled(data.settings.notifications.sound === 'custom');
+            setVolume(data.settings.notifications.volume);
             setPrivacySettings(data.settings.privacy);
             setKeyboardShortcuts(data.settings.shortcuts);
           }
@@ -263,6 +249,27 @@ const Settings = () => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [editingShortcut, handleShortcutSave]);
+
+  useEffect(() => {
+    // Load saved settings
+    const savedSettings = localStorage.getItem('settings');
+    if (savedSettings) {
+      const { notifications, soundEnabled, volume } = JSON.parse(savedSettings);
+      setNotifications(notifications);
+      setSoundEnabled(soundEnabled);
+      setVolume(volume);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save settings when they change
+    const settings = {
+      notifications,
+      soundEnabled,
+      volume
+    };
+    localStorage.setItem('settings', JSON.stringify(settings));
+  }, [notifications, soundEnabled, volume]);
 
   return (
     <Container sx={{ 
@@ -401,26 +408,11 @@ const Settings = () => {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={emailNotifications}
-                    onChange={(e) => {
-                      setEmailNotifications(e.target.checked);
-                      handleSave('emailNotifications', e.target.checked);
-                    }}
+                    checked={notifications}
+                    onChange={(e) => setNotifications(e.target.checked)}
                   />
                 }
-                label={<Typography sx={{ color: 'rgba(255,255,255,0.8)' }}>Email Notifications</Typography>}
-              />
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={pushNotifications}
-                    onChange={(e) => {
-                      setPushNotifications(e.target.checked);
-                      handleSave('pushNotifications', e.target.checked);
-                    }}
-                  />
-                }
-                label={<Typography sx={{ color: 'rgba(255,255,255,0.8)' }}>Push Notifications</Typography>}
+                label={<Typography sx={{ color: 'rgba(255,255,255,0.8)' }}>Enable Notifications</Typography>}
               />
             </Box>
           </Paper>
@@ -488,15 +480,56 @@ const Settings = () => {
             </Box>
           </Paper>
         </motion.div>
+
+        <motion.div variants={itemVariants}>
+          <Paper 
+            sx={{ 
+              p: 3,
+              transition: 'all 0.3s ease',
+              background: 'rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                background: 'rgba(0, 0, 0, 0.5)',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
+              }
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              <SecurityIcon sx={{ mr: 1, color: '#ffffff' }} />
+              <Typography variant="h6" sx={{ color: '#ffffff' }}>Sound</Typography>
+            </Box>
+            <Box sx={{ pl: 2 }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={soundEnabled}
+                    onChange={(e) => setSoundEnabled(e.target.checked)}
+                  />
+                }
+                label={<Typography sx={{ color: 'rgba(255,255,255,0.8)' }}>Enable Sound</Typography>}
+              />
+              <Box sx={{ mt: 2 }}>
+                <Typography gutterBottom>Volume</Typography>
+                <Slider
+                  value={volume}
+                  onChange={(e, newValue) => setVolume(newValue)}
+                  disabled={!soundEnabled}
+                />
+              </Box>
+            </Box>
+          </Paper>
+        </motion.div>
       </motion.div>
 
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
-        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        onClose={handleCloseSnackbar}
       >
         <Alert 
-          onClose={() => setSnackbar({ ...snackbar, open: false })} 
+          onClose={handleCloseSnackbar} 
           severity={snackbar.severity}
           sx={{ 
             width: '100%',

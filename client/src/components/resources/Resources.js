@@ -1,34 +1,24 @@
 import React, { useState } from 'react';
 import {
   Container,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
   Typography,
   Box,
   Tabs,
   Tab,
-  Button,
-  Chip,
-  IconButton,
-  Tooltip,
-  useTheme,
-  alpha
+  Paper,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActionArea,
+  useTheme
 } from '@mui/material';
-import {
-  PlayCircleOutline,
-  BookmarkBorder,
-  Bookmark,
-  Share,
-  Download,
-  AccessTime,
-  School,
-  Business,
-  TrendingUp,
-  Code
-} from '@mui/icons-material';
 import { motion } from 'framer-motion';
+import {
+  VideoLibrary as VideoLibraryIcon,
+  Article as ArticleIcon,
+  Build as BuildIcon
+} from '@mui/icons-material';
 
 const resources = {
   videos: [

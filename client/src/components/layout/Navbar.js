@@ -14,8 +14,12 @@ import {
   MenuItem,
   useTheme
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { 
+  Menu as MenuIcon,
+  Notifications as NotificationsIcon,
+  Settings as SettingsIcon,
+  ExitToApp as ExitToAppIcon
+} from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 

@@ -3,16 +3,15 @@ import { Container, Typography, Grid, Card, CardContent, CardActions, Button, Bo
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  TrendingUp,
-  People,
+  TrendingUp as TrendingUpIcon,
+  People as PeopleIcon,
   AttachMoney,
-  Assessment,
-  Description,
+  Assessment as AssessmentIcon,
+  Description as DescriptionIcon,
   Notifications,
   Timeline,
-  Business,
-  School,
-  Code
+  Business as BusinessIcon,
+  School as SchoolIcon
 } from '@mui/icons-material';
 
 const Dashboard = () => {
@@ -25,7 +24,7 @@ const Dashboard = () => {
       description: 'Create and manage your startup ventures',
       action: () => navigate('/startups'),
       buttonText: 'View Startups',
-      icon: <Business sx={{ fontSize: 40 }} />,
+      icon: <BusinessIcon sx={{ fontSize: 40 }} />,
       color: theme.palette.primary.main
     },
     {
@@ -33,7 +32,7 @@ const Dashboard = () => {
       description: 'Analyze market trends and competition',
       action: () => navigate('/market-analysis'),
       buttonText: 'Analyze Market',
-      icon: <Assessment sx={{ fontSize: 40 }} />,
+      icon: <AssessmentIcon sx={{ fontSize: 40 }} />,
       color: theme.palette.secondary.main
     },
     {
@@ -49,7 +48,7 @@ const Dashboard = () => {
       description: 'Build and manage your startup team',
       action: () => navigate('/team-management'),
       buttonText: 'Manage Team',
-      icon: <People sx={{ fontSize: 40 }} />,
+      icon: <PeopleIcon sx={{ fontSize: 40 }} />,
       color: theme.palette.info.main
     },
     {
@@ -57,7 +56,7 @@ const Dashboard = () => {
       description: 'Create and manage your pitch deck',
       action: () => navigate('/pitch-deck'),
       buttonText: 'View Pitch Deck',
-      icon: <Description sx={{ fontSize: 40 }} />,
+      icon: <DescriptionIcon sx={{ fontSize: 40 }} />,
       color: theme.palette.warning.main
     },
     {
@@ -65,22 +64,22 @@ const Dashboard = () => {
       description: 'Access learning materials and tools',
       action: () => navigate('/resources'),
       buttonText: 'View Resources',
-      icon: <School sx={{ fontSize: 40 }} />,
+      icon: <SchoolIcon sx={{ fontSize: 40 }} />,
       color: theme.palette.error.main
     }
   ];
 
   const recentActivities = [
     { id: 1, action: 'Updated financial projections', time: '2 hours ago', icon: <Timeline /> },
-    { id: 2, action: 'Added new team member', time: '5 hours ago', icon: <People /> },
-    { id: 3, action: 'Completed market analysis', time: '1 day ago', icon: <Assessment /> },
-    { id: 4, action: 'Updated pitch deck', time: '2 days ago', icon: <Description /> }
+    { id: 2, action: 'Added new team member', time: '5 hours ago', icon: <PeopleIcon /> },
+    { id: 3, action: 'Completed market analysis', time: '1 day ago', icon: <AssessmentIcon /> },
+    { id: 4, action: 'Updated pitch deck', time: '2 days ago', icon: <DescriptionIcon /> }
   ];
 
   const metrics = [
     { title: 'Total Revenue', value: '$1.2M', change: '+15%', icon: <AttachMoney /> },
-    { title: 'Active Users', value: '12.5K', change: '+8%', icon: <People /> },
-    { title: 'Conversion Rate', value: '3.2%', change: '+2%', icon: <TrendingUp /> }
+    { title: 'Active Users', value: '12.5K', change: '+8%', icon: <PeopleIcon /> },
+    { title: 'Conversion Rate', value: '3.2%', change: '+2%', icon: <TrendingUpIcon /> }
   ];
 
   const containerVariants = {
