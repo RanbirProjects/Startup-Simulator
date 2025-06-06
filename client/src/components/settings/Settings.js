@@ -20,25 +20,19 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SecurityIcon from '@mui/icons-material/Security';
 
 const Settings = () => {
-  // Theme and appearance settings
   const [themeMode, setThemeMode] = useState('light');
   const [fontSize, setFontSize] = useState(16);
   const [profileVisibility, setProfileVisibility] = useState('public');
   const [twoFactorAuth, setTwoFactorAuth] = useState(false);
-
-  // Notification settings
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [volume, setVolume] = useState(70);
-
-  // Snackbar state
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: 'success'
   });
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -75,7 +69,6 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    // Load saved settings
     const savedSettings = localStorage.getItem('settings');
     if (savedSettings) {
       const { notifications, soundEnabled, volume } = JSON.parse(savedSettings);
@@ -86,7 +79,6 @@ const Settings = () => {
   }, []);
 
   useEffect(() => {
-    // Save settings when they change
     const settings = {
       notifications,
       soundEnabled,

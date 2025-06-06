@@ -11,14 +11,10 @@ import {
   Avatar,
   Button,
   Tooltip,
-  MenuItem,
-  useTheme
+  MenuItem
 } from '@mui/material';
 import { 
   Menu as MenuIcon,
-  Notifications as NotificationsIcon,
-  Settings as SettingsIcon,
-  ExitToApp as ExitToAppIcon,
   AccountCircle as AccountCircleIcon
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
@@ -34,7 +30,6 @@ const pages = [
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMenuAnchorEl, setMobileMenuAnchorEl] = useState(null);
-  const theme = useTheme();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 

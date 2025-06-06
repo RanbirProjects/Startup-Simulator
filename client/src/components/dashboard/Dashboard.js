@@ -11,7 +11,6 @@ import {
   ListItemText,
   ListItemAvatar,
   Divider,
-  useTheme,
   Paper
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +29,6 @@ import {
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
 
   const features = [
     {
