@@ -28,7 +28,8 @@ import {
   Download as DownloadIcon,
   PlayCircleOutline as PlayCircleOutlineIcon,
   School as SchoolIcon,
-  Code as CodeIcon
+  Code as CodeIcon,
+  AccessTime as AccessTimeIcon
 } from '@mui/icons-material';
 
 const resources = {
@@ -320,7 +321,7 @@ const Resources = () => {
                 }}
               >
                 <Typography variant="caption">
-                  <AccessTime sx={{ fontSize: 14, verticalAlign: 'middle', mr: 0.5 }} />
+                  <AccessTimeIcon sx={{ fontSize: 14, verticalAlign: 'middle', mr: 0.5 }} />
                   {video.duration}
                 </Typography>
               </Box>
@@ -392,7 +393,7 @@ const Resources = () => {
                     color="primary"
                   />
                   <Typography variant="caption" color="text.secondary">
-                    <AccessTime sx={{ fontSize: 14, verticalAlign: 'middle', mr: 0.5 }} />
+                    <AccessTimeIcon sx={{ fontSize: 14, verticalAlign: 'middle', mr: 0.5 }} />
                     {article.readTime}
                   </Typography>
                 </Box>
