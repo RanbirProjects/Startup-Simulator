@@ -167,13 +167,15 @@ const Navbar = () => {
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt={user.name}
-                      src={user.avatar}
-                      sx={{ bgcolor: 'primary.main' }}
-                    >
-                      {user.name?.charAt(0)}
-                    </Avatar>
+                    {user.avatar ? (
+                      <Avatar
+                        alt={user.name}
+                        src={user.avatar}
+                        sx={{ bgcolor: 'primary.main' }}
+                      />
+                    ) : (
+                      <AccountCircleIcon sx={{ fontSize: 40, color: 'primary.main' }} />
+                    )}
                   </IconButton>
                 </Tooltip>
                 <Menu
