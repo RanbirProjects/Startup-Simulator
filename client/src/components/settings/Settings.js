@@ -64,6 +64,7 @@ const Settings = () => {
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [volume, setVolume] = useState(70);
+  const [customSound, setCustomSound] = useState(null);
 
   // Keyboard shortcuts
   const [keyboardShortcuts, setKeyboardShortcuts] = useState({
@@ -137,7 +138,7 @@ const Settings = () => {
     const sound = event.target.value;
     setNotifications(sound === 'custom');
     setSoundEnabled(sound === 'custom');
-    if (sound === 'custom') {
+    if (sound === 'custom' && customSound) {
       const audio = new Audio(URL.createObjectURL(customSound));
       audio.volume = volume / 100;
       audio.play();

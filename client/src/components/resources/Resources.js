@@ -11,13 +11,24 @@ import {
   CardContent,
   CardMedia,
   CardActionArea,
-  useTheme
+  useTheme,
+  Tooltip,
+  IconButton,
+  Button,
+  Chip
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import {
   VideoLibrary as VideoLibraryIcon,
   Article as ArticleIcon,
-  Build as BuildIcon
+  Build as BuildIcon,
+  Bookmark as BookmarkIcon,
+  BookmarkBorder as BookmarkBorderIcon,
+  Share as ShareIcon,
+  Download as DownloadIcon,
+  PlayCircleOutline as PlayCircleOutlineIcon,
+  School as SchoolIcon,
+  Code as CodeIcon
 } from '@mui/icons-material';
 
 const resources = {
@@ -279,7 +290,7 @@ const Resources = () => {
                       }
                     }}
                   >
-                    {savedItems.includes(video.id) ? <Bookmark /> : <BookmarkBorder />}
+                    {savedItems.includes(video.id) ? <BookmarkIcon /> : <BookmarkBorderIcon />}
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Share">
@@ -292,7 +303,7 @@ const Resources = () => {
                       }
                     }}
                   >
-                    <Share />
+                    <ShareIcon />
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -334,7 +345,7 @@ const Resources = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  startIcon={<PlayCircleOutline />}
+                  startIcon={<PlayCircleOutlineIcon />}
                   href={video.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -433,7 +444,7 @@ const Resources = () => {
                   />
                   <Tooltip title="Download">
                     <IconButton>
-                      <Download />
+                      <DownloadIcon />
                     </IconButton>
                   </Tooltip>
                 </Box>
@@ -536,17 +547,17 @@ const Resources = () => {
             }}
           >
             <Tab
-              icon={<PlayCircleOutline />}
+              icon={<PlayCircleOutlineIcon />}
               label="Video Tutorials"
               iconPosition="start"
             />
             <Tab
-              icon={<School />}
+              icon={<SchoolIcon />}
               label="Articles"
               iconPosition="start"
             />
             <Tab
-              icon={<Code />}
+              icon={<CodeIcon />}
               label="Tools & Templates"
               iconPosition="start"
             />
