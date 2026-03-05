@@ -1,97 +1,79 @@
-Autonomous Startup Simulator
+<h1 align="center">🚀 Autonomous Startup Simulator</h1>
 
-A game-like platform where users can run AI-powered virtual startups. Think of it as SimCity but for AI companies!
-Login page
-![43A9E097-9137-4757-BD7A-5734F8FA9563](https://github.com/user-attachments/assets/de392be6-85b9-4bf9-8c47-30ba1263beba)
-Dashboard
-![8B148BDF-620B-4B45-8D03-2F4791830D23](https://github.com/user-attachments/assets/e047cea5-874c-4719-91fc-35dd0d1dc087)
-Analytics Dashboard
-![05A23078-8AA0-4AE4-9DD4-8B4EE2A74FD6](https://github.com/user-attachments/assets/a1572007-8ae0-4f8e-9ae0-b2dc911cd252)
-Resources 
-![25DB0943-6BB2-4017-B6BB-7C28C48736F6](https://github.com/user-attachments/assets/f20271f7-3aca-4a03-a0ba-a3decb2fce49)
-Settings
-![F3F4D6E4-2F47-4B99-8320-4AD0D1ED0B65](https://github.com/user-attachments/assets/7bc29139-1bae-4495-a240-d89e7c5bcc8a)
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?size=25&duration=3000&color=00BFFF&center=true&vCenter=true&width=600&lines=Run+AI+Startups+Like+SimCity;Build+Teams+%26+Grow+Revenue;Monitor+Analytics+in+Real-Time" />
+</p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-blue?style=flat&logo=react" />
+  <img src="https://img.shields.io/badge/Node.js-20-green?style=flat&logo=node.js" />
+  <img src="https://img.shields.io/badge/Express-4.18-lightgrey?style=flat&logo=express" />
+  <img src="https://img.shields.io/badge/MongoDB-6.0-brightgreen?style=flat&logo=mongodb" />
+  <img src="https://img.shields.io/badge/JWT-Authentication-red?style=flat&logo=jsonwebtokens" />
+</p>
 
+---
 
-Features
+## 📌 Project Overview
 
-- Create and manage virtual AI startups
-- Simulate hiring, development progress, user growth, and revenue
-- Compete with other startups in a sandboxed market
-- Real-time metrics and visualizations
-- Team management and development tracking
+**Autonomous Startup Simulator** is a game-like platform where users can run **AI-powered virtual startups**.  
+Think of it as **SimCity**, but for AI companies!  
 
-Tech Stack
+- Manage startups, hire teams, track progress, and grow revenue  
+- Compete in a sandboxed virtual market  
+- Real-time metrics, charts, and analytics dashboards  
 
-- Frontend: React, Material-UI, Chart.js
-- Backend: Node.js, Express
-- atabase: MongoDB
-- Authentication: JWT
+---
 
-Prerequisites
+## 🖼️ Screenshots
 
-- Node.js (v14 or higher)
-- MongoDB
-- npm or yarn
+### Login Page
+![Login](https://github.com/user-attachments/assets/de392be6-85b9-4bf9-8c47-30ba1263beba)
 
- Installation
+### Dashboard
+![Dashboard](https://github.com/user-attachments/assets/e047cea5-874c-4719-91fc-35dd0d1dc087)
 
-1. Clone the repository:
+### Analytics Dashboard
+![Analytics](https://github.com/user-attachments/assets/a1572007-8ae0-4f8e-9ae0-b2dc911cd252)
+
+### Resources
+![Resources](https://github.com/user-attachments/assets/f20271f7-3aca-4a03-a0ba-a3decb2fce49)
+
+### Settings
+![Settings](https://github.com/user-attachments/assets/7bc29139-1bae-4495-a240-d89e7c5bcc8a)
+
+---
+
+## ✨ Features
+
+- Create and manage virtual AI startups  
+- Simulate hiring, development, user growth, and revenue  
+- Real-time analytics and visualizations  
+- Team management and project tracking  
+- Compete with other startups  
+
+---
+
+## 🏗️ Tech Stack
+
+**Frontend:** React, Material-UI, Chart.js  
+**Backend:** Node.js, Express  
+**Database:** MongoDB  
+**Authentication:** JWT  
+
+---
+
+## ⚙️ Prerequisites
+
+- Node.js (v14 or higher)  
+- MongoDB  
+- npm or yarn  
+
+---
+
+## 💻 Installation & Running Locally
+
+### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/yourusername/autonomous-startup-simulator.git
 cd autonomous-startup-simulator
-```
-
-2. Install backend dependencies:
-```bash
-npm install
-```
-
-3. Install frontend dependencies:
-```bash
-cd client
-npm install
-```
-
-4. Create a `.env` file in the root directory:
-```
-MONGODB_URI=mongodb://localhost:27017/startup-simulator
-JWT_SECRET=your-secret-key
-PORT=5000
-```
-
- Running the Application
-
-1. Start the backend server:
-```bash
-npm run dev
-```
-
-2. In a new terminal, start the frontend:
-```bash
-cd client
-npm start
-```
-
-The application will be available at `http://localhost:3000`
-
-Usage
-
-1. Register a new account or login
-2. Create a new startup by providing a name and goal
-3. Use the simulation controls to progress your startup
-4. Monitor metrics and make strategic decisions
-5. Compete with other startups in the market
-
-Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
